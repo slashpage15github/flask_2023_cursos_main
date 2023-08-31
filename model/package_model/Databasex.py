@@ -1,6 +1,7 @@
 import pymysql
 class Databasex :
     conn = ""
+    cursor=""
 
     def __init__(self):
        try: 
@@ -9,7 +10,8 @@ class Databasex :
                                        user='root',
                                        passwd='',
                                        db='pop')
-            print("ok") 
+            self.cursor=self.conn.cursor()
+            #print("ok") 
        except Exception as e:
            print(e)
 

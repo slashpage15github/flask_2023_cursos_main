@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "${workspaceFolder}/model/"
+        "${workspaceFolder}/model/",
+        "./model/package_model"
     ]
 }
