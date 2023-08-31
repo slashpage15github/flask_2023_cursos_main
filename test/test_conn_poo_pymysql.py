@@ -1,6 +1,6 @@
-import conn_poo
+import conn_poo_pymysql
 
-db = conn_poo.database()
+db = conn_poo_pymysql.Database()
 
 staff = db.getData("SELECT * FROM student")
 

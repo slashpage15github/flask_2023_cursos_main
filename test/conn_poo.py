@@ -1,5 +1,4 @@
 import mysql.connector
-
 class database :
     conn = ""
     cursor = ""
@@ -19,7 +18,7 @@ class database :
 
         #Checking if the user has applied a string
         if isinstance(query, str):
-            cursor = self.conn.cursor(dictionary=True)
+            #cursor = self.conn.cursor(dictionary=True)
             self.cursor.execute(query)
         else:
             return "You have provided a request that can't be processed"
