@@ -47,10 +47,14 @@
                         </div>
                         <div class="col-75">    
                                 <select name="f_id_empresa" id="f_id_empresa">
-                                    <option value="0">Seleccione</option>
-                                    {% for empre in lista_empresas %}
-                                    <option value="{{ empre[0] }}">{{ empre[1] }}</option>
-                                    {% endfor %}
+                                {% if lista_empresas|length !=0  %}
+                                <option value="0">Seleccione</option>
+                                            {% for empre in lista_empresas %}
+                                                    <option value="{{ empre[0] }}">{{ empre[1] }}</option>
+                                            {% endfor %}
+                                {% else %}
+                                    <option value="0">No hay Datos</option>
+                                {% endif %}                                    
                                 </select>    
                         </div>
                 </div>                                                                
@@ -79,10 +83,14 @@
                         </div>
                         <div class="col-75">    
                                 <select name="f_id_curso" id="f_id_curso">
-                                    <option value="0">Seleccione</option>
-                                    {% for curso in lista_cursos %}
-                                    <option value="{{ curso[0] }}">{{ curso[1] }}</option>
-                                    {% endfor %}
+                                {% if lista_cursos|length !=0  %}
+                                        <option value="0">Seleccione</option>
+                                                {% for curso in lista_cursos %}
+                                                        <option value="{{ curso[0] }}">{{ curso[1] }}</option>
+                                                {% endfor %}
+                                {% else %}
+                                        <option value="0">No hay Datos</option>
+                                {% endif %}  
                                 </select>    
                         </div>
                 </div>                
