@@ -1,8 +1,8 @@
 {% extends "base_bootstrap.html" %}
 	{% block body %} 
         <body id="aspira">
-        <div class="container_aspirante">               
-        <h1 id="aspira">Registrse para uno o más cursos Please</h1>
+        <div class="container_aspirante">
+        <h1 id="aspira">Registrarse para uno o más cursos Please</h1>
         <p id="aspira">Puede seleccionar 1 o más cursos, es requisito el RFC</p>
         <form name="forma" id="forma" action="/registra" method="post" onsubmit="return valida_aspirante();">
                 <div id="row">
@@ -48,9 +48,9 @@
                         <div class="col-75">    
                                 <select name="f_id_empresa" id="f_id_empresa">
                                     <option value="0">Seleccione</option>
-                                    <option value="1">COCA COLA</option>
-                                    <option value="2">JUSTIA</option>
-                                    <option value="3">MAGNA</option>
+                                    {% for empre in lista_empresas %}
+                                    <option value="{{ empre[0] }}">{{ empre[1] }}</option>
+                                    {% endfor %}
                                 </select>    
                         </div>
                 </div>                                                                
@@ -80,10 +80,9 @@
                         <div class="col-75">    
                                 <select name="f_id_curso" id="f_id_curso">
                                     <option value="0">Seleccione</option>
-                                    <option value="1">PYTHON</option>
-                                    <option value="2">MYSQL</option>
-                                    <option value="3">ANGULAR</option>
-                                    <option value="4">JAVASCRIPT</option>
+                                    {% for curso in lista_cursos %}
+                                    <option value="{{ curso[0] }}">{{ curso[1] }}</option>
+                                    {% endfor %}
                                 </select>    
                         </div>
                 </div>                

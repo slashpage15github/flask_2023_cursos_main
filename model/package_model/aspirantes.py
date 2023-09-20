@@ -11,15 +11,23 @@ class Aspirantes:
         self.__fecha_registro=fecha_registro
     
     def insertar_student(self, obj_asp):
-        return obj_asp.__rfc
+        #return obj_asp.__rfc
         #return obj_asp
-        # conexion = Database.Database()
-        # with conexion.cursor as cursor:
-        #     affected=cursor.execute("INSERT INTO student(name, branch, roll, section, age) VALUES (%s, %s, %s, %s, %s)",
-        #                 (nom, bra, rol,sec,age))
-        # conexion.conn.commit()
-        # conexion.conn.close()
-        # return affected
+        conexion = Database.Database()
+        with conexion.cursor as cursor:
+            try:
+                query="INSERT INTO aspirantes(RFC,ID_EMPRESA,NOMBRE,PATERNO,MATERNO,TELEFONO,EMAIL,FECHA_REGISTRO) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+                vals=(obj_asp.__rfc,obj_asp.__id_empresa, obj_asp.__nombre, obj_asp.__paterno,obj_asp.__materno,obj_asp.__telefono,obj_asp.__email,obj_asp.__fecha_registro)
+                #return (query % vals) ver sentencia
+                affected=cursor.execute(query,vals)
+                conexion.conn.commit()
+                return str(cursor.rowcount)
+            except Exception as e:
+                return e
+            except pymysql.err.ProgrammingError as except_detail:
+                return print("pymysql.err.ProgrammingError: «{}»".format(except_detail))
+            finally:
+                conexion.conn.close() 
     
     def eliminar_student(self,id):
         conexion = Database.Database()
