@@ -5,6 +5,7 @@ import model.package_model.Curso as Curso
 from datetime import datetime
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'j\x86\x14\xcc:\x99\xb3\x91\xf8/Bv\r\xaa"\xf1\x8a\xfa(A\xa1\xe2\x85\xd6'
 
 @app.route("/")
 @app.route("/index")
@@ -33,7 +34,10 @@ def registra_aspirante():
     obj_asp= aspirantes.Aspirantes(_rfc,_nom,_pat,_mat,_emp,_tel,_ema,_fec)
     res=obj_asp.insertar_student(obj_asp)
     #return _rfc+'-'+_nom+'-'+_pat+'-'+_mat+'-'+_emp+'-'+_tel+'-'+_ema+'-'+_cur
-    return res
+    flash(f"correcto","danger")
+    return redirect(url_for('add_aspirante'))  
+    #return render_template('aspirante.html')
+    #return res
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,6 +5,7 @@
         <h1 id="aspira">Registrarse para uno o más cursos Please</h1>
         <p id="aspira">Puede seleccionar 1 o más cursos, es requisito el RFC</p>
         <form name="forma" id="forma" action="/registra" method="post" onsubmit="return valida_aspirante();">
+                {% include "sweetalerts.html" %}
                 <div id="row">
                         <div class="col-25">
                                 <label id="aspira">RFC:</label>
