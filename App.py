@@ -39,5 +39,9 @@ def registra_aspirante():
     #return render_template('aspirante.html')
     #return res
 
+@app.route("/lista_cursos")
+def lista_cursos():
+    return render_template('lista_cursos.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
