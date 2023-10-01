@@ -1,9 +1,45 @@
 {% extends "base_bootstrap.html" %}
 	{% block body %}
     <body id="lista_cursos">
-        <div class="container_lista_cursos">
-        <h1>Listado del Catalogo de Cursos</h1>
-        <p>Son los cursos disponibles y avalados por el organismo educativo</p>
+        <div class="container">
+            <h1>Listado del Catalogo de Cursos</h1>
+            <p>Son los cursos disponibles y avalados por el organismo educativo</p>
+                <div>
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID CURSO</th>
+                                <th>NOMBRE CURSO</th>
+                                <th>FECHA ALTA</th>
+                                <th>Actualizar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cursos in lista_cursos %}
+                            <tr>
+                                <td>{{ cursos[0] }}</td>
+                                <td>{{ cursos[1] }}</td>
+                                <td>{{ cursos[2] }}</td>
+                                <td>
+                                    <button class='update btn btn-success btn-sm' id={{"update_"~cursos[0] }} data-id={{'\"' + (cursos[0]).string + '\"'}} >Actualizar</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <!--<tfoot>
+                            <tr>
+                                <th>id cur</th>
+                                <th>nombre</th>
+                                <th>fecha</th>
+                            </tr>
+                        </tfoot>-->
+                    </table>
+                </div>
         </div><!--end container-->
+    <script>
+        $(document).ready(function(){
+            $('#example').DataTable();
+        });//end ready function
+    </script>
     </body>
     {% endblock %}

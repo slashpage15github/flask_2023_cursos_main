@@ -39,9 +39,11 @@ def registra_aspirante():
     #return render_template('aspirante.html')
     #return res
 
-@app.route("/lista_cursos")
+@app.route("/lista_cursos",methods=["POST","GET"])
 def lista_cursos():
-    return render_template('lista_cursos.html')
+    obj_cur= Curso.Curso()
+    lista_cursos = obj_cur.obtener_cursos()
+    return render_template('lista_cursos.html',lista_cursos=lista_cursos)
 
 if __name__ == "__main__":
     app.run(debug=True)
