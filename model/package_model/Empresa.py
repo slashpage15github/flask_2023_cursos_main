@@ -18,7 +18,7 @@ class Empresa:
         empresa = None
         with conexion.cursor as cursor:
             cursor.execute(
-                "SELECT NAME, BRANCH, ROLL, SECTION, AGE FROM student WHERE NAME = %s", (id))
+                "SELECT ID_EMPRESA,NOMBRE_EMPRESA FROM empresa WHERE ID_EMPRESA = %s", (id))
             empresa = cursor.fetchone()
         conexion.conn.close()
         return empresa                

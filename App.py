@@ -34,7 +34,7 @@ def registra_aspirante():
     obj_asp= aspirantes.Aspirantes(_rfc,_nom,_pat,_mat,_emp,_tel,_ema,_fec)
     res=obj_asp.insertar_student(obj_asp)
     #return _rfc+'-'+_nom+'-'+_pat+'-'+_mat+'-'+_emp+'-'+_tel+'-'+_ema+'-'+_cur
-    flash(f"correcto","danger")
+    flash(f"Aspirante registrado correctamente","success")
     return redirect(url_for('add_aspirante'))  
     #return render_template('aspirante.html')
     #return res

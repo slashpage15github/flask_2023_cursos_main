@@ -33,11 +33,11 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="btn btn-success" href={{ url_for('add_aspirante')}}>Registro</a>
     <a class="btn btn-warning" href="#" style="margin-left: 5px">Buscar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample01">
+    <div class="collapse navbar-collapse" id="navbarsExample04">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href={{ url_for('index')}}>Login <span class="sr-only">(current)</span></a>
@@ -60,7 +60,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo strtoupper($_SESSION['usuario']);?></a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">pte</a>
           <div class="dropdown-menu drop-catalogo" aria-labelledby="dropdown06">
             <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
           </div>
@@ -84,5 +84,8 @@
     <script src="{{url_for('static', filename='datatables/Buttons-2.4.2/js/buttons.html5.min.js')}}"></script>
     <script src="{{url_for('static', filename='datatables/Buttons-2.4.2/js/buttons.print.min.js')}}"></script>
     <script src="{{url_for('static', filename='datatables/Responsive-2.5.0/js/dataTables.responsive.min.js')}}"></script>
-</body>
+    <script src="{{url_for('static', filename='datatables/JSZip-3.10.1/jszip.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/pdfmake-0.2.7/pdfmake.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/pdfmake-0.2.7/vfs_fonts.js')}}"></script>
+  </body>
 </html>

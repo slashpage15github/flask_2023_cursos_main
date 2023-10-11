@@ -18,8 +18,7 @@ class Curso:
         conexion = conexion = Database.Database()
         curso = None
         with conexion.cursor as cursor:
-            cursor.execute(
-                "SELECT ID_CURSO,NOMBRE_CURSO,FECHA_ALTA FROM catalogo_curso WHERE ID_CURSO = %s", (id))
+            cursor.execute("SELECT ID_CURSO,NOMBRE_CURSO,FECHA_CURSO FROM catalogo_curso WHERE ID_CURSO = %s", (id))
             curso = cursor.fetchone()
         conexion.conn.close()
         return curso                
