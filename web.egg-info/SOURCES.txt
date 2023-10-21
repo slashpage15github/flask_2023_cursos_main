@@ -1,5 +1,7 @@
 README.md
 setup.py
+controllers/__init__.py
+controllers/ctl_aspirantes_val_existe.py
 model/__init__.py
 model/package_model/Curso.py
 model/package_model/Database.py
@@ -17,6 +19,7 @@ test/class_teacher.py
 test/conn_poo.py
 test/conn_poo_pymysql.py
 test/test_Database_test.py
+test/test_aspirante.py
 test/test_class_teacher.py
 test/test_conexion.py
 test/test_conn2.py

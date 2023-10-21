@@ -1,4 +1,5 @@
 import model.package_model.Database as Database
+from flask import jsonify
 class Aspirantes:
     def __init__(self, rfc, nombre, paterno, materno,id_empresa, telefono, email, fecha_registro):
         self.__rfc=rfc
@@ -9,6 +10,17 @@ class Aspirantes:
         self.__telefono=telefono
         self.__email=email
         self.__fecha_registro=fecha_registro
+    
+    @staticmethod    
+    def existe_aspirante(rfc):
+        conexion = conexion = Database.Database()
+        aspirante = None
+        with conexion.cursor as cursor:
+            cursor.execute(
+                "SELECT count(*) FROM aspirantes WHERE RFC = %s", rfc)
+            aspirante = cursor.fetchone()
+        conexion.conn.close()
+        return jsonify(aspirante[0])    
     
     def insertar_student(self, obj_asp):
         #return obj_asp.__rfc
