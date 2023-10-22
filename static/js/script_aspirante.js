@@ -1,15 +1,18 @@
 $(document).ready(function() {
     $("#f_rfc").blur(function(){
-        let x_rfc=document.getElementById("f_rfc").value.trim().toUpperCase();
-        if(x_rfc!= '')  
+        let f_rfc=document.getElementById("f_rfc").value.trim().toUpperCase();
+        alert(f_rfc);
+        if(f_rfc!= '')  
         {  
              $.ajax({  
                   url:'/valida_existe',  
                   method:'POST',  
-                  data:{x_rfc:x_rfc},  
+                  data:{f_rfc:f_rfc},
                   success:function(response){
                          //alert(response);
+                         console.log(response)
                          if (response==1){
+                            //alert('pendejo');
                             mensaje('error','Registro duplicado','El Aspirante ya se encuentra registrado!',null);
                          }  
                        

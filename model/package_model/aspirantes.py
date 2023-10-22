@@ -17,10 +17,11 @@ class Aspirantes:
         aspirante = None
         with conexion.cursor as cursor:
             cursor.execute(
-                "SELECT count(*) FROM aspirantes WHERE RFC = %s", rfc)
+                "SELECT count(*) as ex FROM aspirantes WHERE RFC = %s", rfc)
             aspirante = cursor.fetchone()
         conexion.conn.close()
-        return jsonify(aspirante[0])    
+        #return jsonify(aspirante[0])    
+        return aspirante[0]    
     
     def insertar_student(self, obj_asp):
         #return obj_asp.__rfc

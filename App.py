@@ -4,6 +4,7 @@ import model.package_model.Empresa as Empresa
 import model.package_model.Curso as Curso
 from datetime import datetime
 from model.package_model.aspirantes import Aspirantes
+import jsonpickle
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'j\x86\x14\xcc:\x99\xb3\x91\xf8/Bv\r\xaa"\xf1\x8a\xfa(A\xa1\xe2\x85\xd6'
@@ -11,9 +12,9 @@ app.config['SECRET_KEY'] = 'j\x86\x14\xcc:\x99\xb3\x91\xf8/Bv\r\xaa"\xf1\x8a\xfa
 
 @app.route("/valida_existe", methods=['GET','POST'])
 def valida_aspirante():
-    rfc=request.form['x_rfc'].upper()
+    rfc=request.form['f_rfc'].upper()
     cuantos_aspiran=Aspirantes.existe_aspirante(rfc)
-    return cuantos_aspiran
+    return jsonpickle.encode(cuantos_aspiran)
 
 @app.route("/")
 @app.route("/index")
@@ -61,4 +62,3 @@ def lista_cursos():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    controllers.run(debug=True)
