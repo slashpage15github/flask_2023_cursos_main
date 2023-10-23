@@ -13,7 +13,32 @@ $(document).ready(function() {
                          //console.log(response)
                          if (response==1){
                             mensaje('warning','Aviso','El Aspirante ya tiene a menos 1 curso registrado!',null);
-                         }  
+                         
+                            /*BEGIN ajax para trae los datos del aspirante*/ 
+                            /*END ajax para trae los datos del aspirante*/ 
+                            $.ajax({  
+                                url:'/get_aspirante',  
+                                method:'POST',  
+                                data:{f_rfc:f_rfc},
+                                dataType: "json",
+                                success:function(response){
+                                        console.log(response);
+                                        $('#f_nombre').val(response[2]);
+                                        $('#f_paterno').val(response[3]);
+                                        $('#f_materno').val(response[4]);
+                                        $('#f_id_empresa').val(response[1]);
+                                        $('#f_telefono').val(response[5]);
+                                        $('#f_email').val(response[6]);
+                                        $("#f_rfc ").attr("readonly", true); 
+                                },
+                               error : function(request, status, error) {
+              
+                                       var val = request.responseText;
+                                       alert("error"+val);
+                               }  
+                           });  
+                        
+                        }  
                        
                   },
                  error : function(request, status, error) {

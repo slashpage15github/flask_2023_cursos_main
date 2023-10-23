@@ -3,21 +3,31 @@ import model.package_model.aspirantes as aspirantes
 import model.package_model.Empresa as Empresa
 import model.package_model.Curso as Curso
 import model.package_model.AspirantesCursos as AspirantesCursos
-from datetime import datetime
+from datetime import datetime,date,time
 #import metodos static
 from model.package_model.aspirantes import Aspirantes
 from model.package_model.AspirantesCursos import AspirantesCursos
 import jsonpickle
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'j\x86\x14\xcc:\x99\xb3\x91\xf8/Bv\r\xaa"\xf1\x8a\xfa(A\xa1\xe2\x85\xd6'
 
+def datetime_handler(obj):
+    if isinstance(obj, (datetime, date, time)):
+        return str(obj)
 
 @app.route("/valida_existe", methods=['GET','POST'])
 def valida_aspirante():
     rfc=request.form['f_rfc'].upper()
     cuantos_aspiran=Aspirantes.existe_aspirante(rfc)
     return jsonpickle.encode(cuantos_aspiran)
+
+@app.route("/get_aspirante", methods=['GET','POST'])
+def get_aspirante():
+    rfc=request.form['f_rfc'].upper()
+    dato_aspirante=Aspirantes.obtener_aspirante_por_rfc(rfc)
+    return json.dumps(dato_aspirante,default=datetime_handler)
 
 @app.route("/valida_existe_rfc_curso", methods=['GET','POST'])
 def valida_aspirante_rfc_curso():

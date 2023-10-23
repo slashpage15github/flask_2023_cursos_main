@@ -42,38 +42,38 @@ class Aspirantes:
             finally:
                 conexion.conn.close() 
     
-    def eliminar_student(self,id):
+    def eliminar_aspirante(self,rfc):
         conexion = Database.Database()
         with conexion.cursor as cursor:
-            affected=cursor.execute("DELETE FROM student WHERE NAME = %s", (id))
+            affected=cursor.execute("DELETE FROM aspirantes WHERE RFC = %s", (rfc))
         conexion.conn.commit()
         conexion.conn.close()
         return affected
     
-    def actualizar_student(self, bra, rol,sec,age,nom ):
+    def actualizar_aspirante(self, obj_asp ):
         conexion = Database.Database()
         with conexion.cursor as cursor:
-            affected=cursor.execute("UPDATE student SET BRANCH = %s, ROLL = %s, SECTION = %s, AGE = %s WHERE NAME = %s",
-                       (bra, rol, sec, age, nom))
+            affected=cursor.execute("UPDATE aspirantes SET ID_EMPRESA = %s, NOMBRE = %s, PATERNO = %s, MATERNO = %s, TELEFONO = %s, EMAIL = %s, FECHA_REGISTRO=%s WHERE RFC = %s",
+                       obj_asp.__id_empresa, obj_asp.__nombre, obj_asp.__paterno,obj_asp.__materno,obj_asp.__telefono,obj_asp.__email,obj_asp.__fecha_registro)
         conexion.conn.commit()
         conexion.conn.close()
         return affected
 
-    def obtener_students(self):
+    def obtener_aspirantes(self):
         conexion = Database.Database()
         students = []
         with conexion.cursor as cursor:
-            cursor.execute("SELECT name, branch, roll, section, age FROM student")
+            cursor.execute("SELECT * FROM aspirantes")
             students = cursor.fetchall()
         conexion.conn.close()
         return students
     
-    def obtener_student_por_id(self,id):
+    def obtener_aspirante_por_rfc(rfc):
         conexion = conexion = Database.Database()
         student = None
         with conexion.cursor as cursor:
             cursor.execute(
-                "SELECT NAME, BRANCH, ROLL, SECTION, AGE FROM student WHERE NAME = %s", (id))
+                "SELECT * FROM aspirantes WHERE RFC = %s", (rfc))
             student = cursor.fetchone()
         conexion.conn.close()
         return student                

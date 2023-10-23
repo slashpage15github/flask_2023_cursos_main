@@ -98,7 +98,9 @@
 
                 <div id="row2">
                             <input class="boton_menu" type="submit" name="add" value="Registrar">
-                </div>                
+                            &nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger" type="button" name="recarga" onclick="window.location.href='{{ url_for( 'add_aspirante') }}';">Limpiar</button>
+                        </div>                
         </form>
         </div>
         <script src="{{ url_for('static', filename='js/script_aspirante.js') }}"></script>
