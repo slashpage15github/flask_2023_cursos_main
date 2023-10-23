@@ -3,6 +3,7 @@ setup.py
 controllers/__init__.py
 controllers/ctl_aspirantes_val_existe.py
 model/__init__.py
+model/package_model/AspirantesCursos.py
 model/package_model/Curso.py
 model/package_model/Database.py
 model/package_model/Databasex.py
