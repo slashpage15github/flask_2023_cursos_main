@@ -17,11 +17,13 @@ app.config['SECRET_KEY'] = 'j\x86\x14\xcc:\x99\xb3\x91\xf8/Bv\r\xaa"\xf1\x8a\xfa
 @app.route("/delete_curso",methods=['POST'])
 def delete_curso():
     _curso_id=request.form['id']
-    obj_cur= Curso.Curso()
-    datos_curso=obj_cur.eliminar_curso(_curso_id)
-    #if datos_curso!= 1:
-        #datos_curso=-1
-    return str(datos_curso)
+    cuantos_cursos=AspirantesCursos.existe_curso(_curso_id)
+    if cuantos_cursos == 0:
+        obj_cur= Curso.Curso()
+        datos_curso=obj_cur.eliminar_curso(_curso_id)
+        return str(datos_curso)
+    else:
+        return "-1"
     
 
 

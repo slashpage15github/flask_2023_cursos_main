@@ -17,6 +17,18 @@ class AspirantesCursos:
         conexion.conn.close()
         #return jsonify(aspirante[0])    
         return aspirantecurso[0]    
+
+    @staticmethod    
+    def existe_curso(id_curso):
+        conexion = conexion = Database.Database()
+        aspirantecurso = None
+        with conexion.cursor as cursor:
+            cursor.execute(
+                "SELECT count(*) as ex FROM aspirantes_cursos WHERE ID_CURSO = %s",(id_curso))
+            aspirantecurso = cursor.fetchone()
+        conexion.conn.close()
+        #return jsonify(aspirante[0])    
+        return aspirantecurso[0]
     
     def insertar_aspirantecursos(self, obj_asp):
         #return obj_asp.__rfc

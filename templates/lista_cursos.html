@@ -185,13 +185,14 @@
                           success: function(response){
                              console.log(response);
                             // remueve el registro tambien del datatable
-                            if(response == "1"){
+                            if(response == 1){
                                $(el).closest('tr').css('background','tomato');
                                $(el).closest('tr').fadeOut(800,function(){
                                $(this).remove();
+                               location.reload();
                        });
                         }else{
-                            alert('Registro No Fue Eliminado!');
+                            mensaje('error','Aviso','Registro No Fue Eliminado! Existen aspirates con el curso a borrar',null);
                         }
                           }
                         });

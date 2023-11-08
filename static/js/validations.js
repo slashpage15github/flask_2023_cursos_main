@@ -90,7 +90,7 @@ let valida_aspirante = () =>{
 
 let mensaje = (tipo,titulo,texto,liga) =>{
   Swal.fire({
-    type: tipo,
+    icon: tipo,
     title: titulo,
     text: texto,
     footer: liga
