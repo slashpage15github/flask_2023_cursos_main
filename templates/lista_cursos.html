@@ -127,11 +127,18 @@
            else  
            { 
             let f_nombre=$('#f_nombre').val();
-            //alert(f_nombre);
+            let f_id=$('#curso_id').val();
+            if (f_id==''){
+                var flag1='I';
+            }
+            else{
+                var flag1='U';
+            }
+            //alert(f_nombre+'-'+f_id+'-'+flag1);
             $.ajax({  
                 url:'/add_curso',  
                 method:'POST',  
-                data:{f_nombre:f_nombre},
+                data:{f_nombre:f_nombre,f_id:f_id},
                 beforeSend:function(){ 
                     if($('#curso_id').val() == ''){ 
                       $('#insert').val("Insertando");
@@ -148,14 +155,31 @@
                         $('#add_data_Modal').modal('hide');
                         /*location.reload();
                         mensaje('success','Aviso','El Curso ha sido registrado!',null);*/
+                        if (flag1=='I'){
+                            Swal.fire({
+                                title: "Registro de Cursos",
+                                text: "¡Curso Ingresado Correctamente!",
+                                icon: "success"
+                                }).then(function() {
+                                window.location = "lista_cursos";
+                                });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Actualización de Cursos",
+                                text: "¡Curso Actualizado Correctamente!",
+                                icon: "success"
+                                }).then(function() {
+                                window.location = "lista_cursos";
+                                });                            
+                        }    
+                      }
+                      else{
                         Swal.fire({
-                            title: "Registro de Cursos",
-                            text: "¡Curso Ingresado Correctamente!",
-                            type: "success"
-                            }).then(function() {
-                              window.location = "lista_cursos";
+                            title: "Actualización de Cursos",
+                            text: "¡No hubo cambios en el curso!",
+                            icon: "error",
                             });
-                     
                       }  
                      
                 },
@@ -231,10 +255,32 @@
             $('#tlista_cursos tbody').on('click', '.update', function() {
        
                 $("h4.modal-title").text("Modificación de Curso");
-              
+
                 // Delete id
-                var update_id = $(this).data('id');
-                alert(update_id);
+                var curso_id = $(this).data('id');
+                //alert(curso_id);
+                $.ajax({  
+                    url:'/ver_detalle_curso_data',  
+                    method:'POST',  
+                    data:{curso_id:curso_id},
+                    dataType:"json",  
+                    success:function(response){
+                            //alert(JSON.stringify(response));
+                            $('#f_nombre').val(response.nombre);
+                            $('#curso_id').val(response.id);
+                            
+                            //$('#curso_detail').html(response);
+                            $('#insert').val("Actualizar");  
+                            $('#add_data_Modal').modal('show');  
+                    },
+                   error : function(request, status, error) {
+
+                           var val = request.responseText;
+                           alert("error"+val);
+                   }  
+               });
+
+          
                 $('#add_data_Modal').modal('show'); 
             });
         });//end ready function
@@ -276,7 +322,7 @@
                             <label>Nombre de Curso:</label>
                             <input type="text" name="f_nombre" id="f_nombre" class="form-control" />  
                             <br />  
-                            <input type="hidden" name="curso_id" id="curso_id" readonly="true" />  
+                            <input type="text" name="curso_id" id="curso_id" readonly="true" />  
                             <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />  
                        </form>  
                   </div>  
