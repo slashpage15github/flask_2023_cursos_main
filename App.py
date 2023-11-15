@@ -1,13 +1,14 @@
-from flask import Flask, render_template, jsonify,request, url_for, flash, redirect
+from flask import Flask, render_template, jsonify,request, g, url_for, flash, redirect,session
 import model.package_model.aspirantes as aspirantes
 import model.package_model.Empresa as Empresa
 import model.package_model.Curso as Curso
+import model.package_model.Usuarios as Usuarios
 import model.package_model.AspirantesCursos as AspirantesCursos
 from datetime import datetime,date,time
 #import metodos static
 from model.package_model.aspirantes import Aspirantes
 from model.package_model.AspirantesCursos import AspirantesCursos
-#from model.package_model.Curso import Curso
+from model.package_model.Usuarios import Usuarios
 import jsonpickle
 import json
 
@@ -96,10 +97,48 @@ def valida_aspirante_rfc_curso():
     cuantos_aspirancursos=AspirantesCursos.existe_aspirantecursos(curso,rfc)
     return jsonpickle.encode(cuantos_aspirancursos)
 
+@app.before_request
+def before_request():
+    if 'user_id' in session:
+        g.v_usuario=session['user_id']
+        g.v_name=session['user_name']
+
 @app.route("/")
-@app.route("/index")
+@app.route("/index",methods=['GET','POST'])
 def index():
     return render_template('index.html')
+
+
+@app.route("/profile")
+def profile():
+    return render_template('profile.html')
+
+@app.route("/valida_usuario",methods=['GET','POST'])
+def valida_usuario():
+    if request.method=='POST':
+        username=request.form['js_us']
+        password=request.form['js_pw']
+        existe=Usuarios.verifica_usuario(username,password)
+        return str(existe)
+    
+    
+@app.route("/sesion_usuario",methods=['GET','POST'])
+def sesion_usuario():
+    if request.method=='POST':
+        username=request.form['js_us']
+        password=request.form['js_pw']
+        obj_user= Usuarios()
+        user_datos=obj_user.verifica_usuario_datos(username,password)
+        session['user_id']=user_datos[0]
+        session['user_name']=user_datos[1]
+        
+        data = { 
+            "id" : user_datos[0], 
+            "nombre" : user_datos[1],
+        } 
+        return jsonify(data)
+     
+    
 
 @app.route("/aspirante")
 def add_aspirante():
@@ -152,6 +191,13 @@ def lista_cursos():
     obj_cur= Curso.Curso()
     lista_cursos = obj_cur.obtener_cursos()
     return render_template('lista_cursos.html',lista_cursos=lista_cursos)
+
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('user_id', None)
+   session.pop('user_name', None)
+   return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)

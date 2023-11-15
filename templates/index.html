@@ -11,7 +11,7 @@
        <h2>Admin Login</h2>
        <p>Please enter your user and password</p>
        </div>
-        <form id="Login" method="post" action="views/aspirante.php" onsubmit="return valida_login();">
+        <form id="login" method="post">
     
             <div class="form-group">
     
@@ -26,15 +26,15 @@
     
             </div>
             <div class="forgot">
-            <a href="reset.html">Forgot password?</a>
+            <!--<a href="reset.html">Forgot password?</a>-->
     </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" name='verifica' id='verifica'>Login</button>
     
         </form>
         </div>
-    <p class="botto-text"> Designed by Sunil Rajput</p>
+    <p class="botto-text">Sistema de Gestión de Limpieza</p>
     </div></div></div>
-    
+    <script src="{{ url_for('static', filename='js/script_login.js') }}"></script>
 </body> 
 
     {% endblock %}

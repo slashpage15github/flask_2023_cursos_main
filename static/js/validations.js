@@ -109,15 +109,15 @@ function valida_login(){
 	//alert(js_us+' -  '+js_pw);
 	if (js_us.length==0 || js_pw.length==0){
 		Swal.fire({
-  			type: 'error',
+  			icon: 'error',
   			title: 'Usuario y password',
   			text: 'El usuario y password no debe ir vacios'
 			}); 
 		return  false;
 	}
-	else if(js_us.length<8 || js_pw.length<8){
+	else if(js_us.length<2 || js_pw.length<2){
 		Swal.fire({
-  			typen: 'error',
+  			icon: 'error',
   			title: 'Usuario y password',
   			text: 'El usuario y password deben contener al menos 8 caracteres'
 			}); 
@@ -126,7 +126,7 @@ function valida_login(){
 	}
 	else if (!pwdpattern.test(js_pw)){
 			Swal.fire({
-  			type: 'error',
+  			icon: 'error',
   			title: 'Password Inseguro',
             html: 'Condiciones: <br>1] Min 1 special character.<br>2] Min 1 number.<br>3] Min 8 characters or More'
 			});	        
